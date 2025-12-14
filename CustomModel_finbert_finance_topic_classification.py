@@ -9,7 +9,7 @@ Original file is located at
 #Step 0: Installation of Packages
 """
 
-!pip uninstall -y wandb     # avoid experiment tracking
+#!pip uninstall -y wandb     # avoid experiment tracking
 
 #!pip install transformers[torch] -q
 !pip install dataset -q
