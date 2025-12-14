@@ -12,9 +12,9 @@ Original file is located at
 #!pip uninstall -y wandb     # avoid experiment tracking
 
 #!pip install transformers[torch] -q
-!pip install dataset -q
-!pip install evaluate -q
-!pip install -U transformers
+#!pip install dataset -q
+#!pip install evaluate -q
+#!pip install -U transformers
 
 """# load model"""
 import streamlit as st
@@ -74,10 +74,10 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from transformers import AutoTokenizer
 
 # 0. Set HF token (recommended: use real env var instead of hardcoding)
-os.environ["HF_TOKEN"] = "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"  # or set it in your shell and remove this line
+#os.environ["HF_TOKEN"] = "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"  # or set it in your shell and remove this line
 
 # 1. Login using the token from HF_TOKEN
-login(token=os.environ["HF_TOKEN"], new_session=False)
+#login(token=os.environ["HF_TOKEN"], new_session=False)
 
 # 2. Load tokenizer and model
 #model = AutoModelForSequenceClassification.from_pretrained("nickmuchi/finbert-tone-finetuned-finance-topic-classification", num_labels=5)
