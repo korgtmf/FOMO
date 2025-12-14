@@ -17,7 +17,7 @@ Original file is located at
 !pip install -U transformers
 
 """# load model"""
-
+import streamlit as st
 # Use a pipeline as a high-level helper
 from transformers import pipeline
 
