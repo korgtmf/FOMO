@@ -2,17 +2,38 @@ import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
+# Topic id -> label mapping (20 financial topics)
+TOPIC_ID2LABEL = {
+    0: "Analyst Update",
+    1: "Fed | Central Banks",
+    2: "Company | Product News",
+    3: "Treasuries | Corporate Debt",
+    4: "Dividend",
+    5: "Earnings",
+    6: "Energy | Oil",
+    7: "Financials",
+    8: "Currencies",
+    9: "Politics",
+    10: "M&A | Investments",
+    11: "Markets",
+    12: "Macro",
+    13: "Tech",
+    14: "Commodities",
+    15: "Fixed Income",
+    16: "Economy",
+    17: "Real Estate",
+    18: "Metals",
+    19: "Legal | Regulation",
+}
+
 @st.cache_resource
 def load_model():
-    model_id = "korgtmf/FOMO"
+    model_id = "korgtmf/FOMO"  # your fine-tuned model on HF
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForSequenceClassification.from_pretrained(model_id)
     return tokenizer, model
 
 tokenizer, model = load_model()
-
-# Normalize keys to int
-ID2LABEL = {int(k): v for k, v in model.config.id2label.items()}
 
 st.title("FOMO – Financial News Topic/Sentiment Demo")
 
@@ -31,6 +52,6 @@ if st.button("Predict") and text.strip():
         probs = torch.softmax(logits, dim=-1)[0]
         pred_id = int(torch.argmax(probs))
 
-    pred_label = ID2LABEL.get(pred_id, f"Unknown ({pred_id})")
+    pred_label = TOPIC_ID2LABEL.get(pred_id, f"Unknown ({pred_id})")
     st.write(f"Predicted topic: {pred_label} (id={pred_id})")
     st.bar_chart(probs.numpy())
