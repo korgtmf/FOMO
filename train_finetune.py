@@ -64,10 +64,10 @@ from huggingface_hub import login
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 # 0. Set HF token (recommended: use real env var instead of hardcoding)
-os.environ["HF_TOKEN"] = "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"  # remove in production
+#os.environ["HF_TOKEN"] = "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"  # remove in production
 
 # 1. Login using the token from HF_TOKEN
-login(token=os.environ["HF_TOKEN"], new_session=False)
+#login(token=os.environ["HF_TOKEN"], new_session=False)
 
 # 2. Load tokenizer and model
 model_id = "nickmuchi/finbert-tone-finetuned-finance-topic-classification"
