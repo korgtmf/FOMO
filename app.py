@@ -4,15 +4,15 @@ import torch
 
 @st.cache_resource
 def load_model():
-    model_id = "korgtmf/FOMO"  # your fine-tuned model on HF
+    model_id = "korgtmf/FOMO"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForSequenceClassification.from_pretrained(model_id)
     return tokenizer, model
 
 tokenizer, model = load_model()
 
-# Read mapping from the checkpoint itself
-ID2LABEL = model.config.id2label  # e.g. {0: 'Analyst Update', ...}
+# Normalize keys to int
+ID2LABEL = {int(k): v for k, v in model.config.id2label.items()}
 
 st.title("FOMO – Financial News Topic/Sentiment Demo")
 
