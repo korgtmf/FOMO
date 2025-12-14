@@ -47,11 +47,17 @@ if st.button("Predict") and text.strip():
         padding=True,
         max_length=128,
     )
+
     with torch.no_grad():
         logits = model(**inputs).logits
         probs = torch.softmax(logits, dim=-1)[0]
         pred_id = int(torch.argmax(probs))
 
+    # Get the predicted label based on the predicted ID
     pred_label = TOPIC_ID2LABEL.get(pred_id, f"Unknown ({pred_id})")
-    st.write(f"Predicted topic: {pred_label} (id={pred_id})")
+
+    # Display only the predicted topic label
+    st.write(f"Predicted topic: {pred_label}")
+
+    # Show the probabilities in a bar chart
     st.bar_chart(probs.numpy())
